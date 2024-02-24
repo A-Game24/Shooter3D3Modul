@@ -25,7 +25,7 @@ public class FireBall : MonoBehaviour
             }
         }
     
-     DestroyFireball();   
+      DestroyFireball();   
     }
     // Update is called once per frame
     void Update()
