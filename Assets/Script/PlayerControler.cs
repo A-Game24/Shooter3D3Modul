@@ -6,7 +6,7 @@ public class PlayerControler : MonoBehaviour
 {
     public float gravity = 9.8f;
     public float jumpForce;
-     public float speed;
+    public float speed;
 
     private Vector3 _moveVector;
 	private float _fallVelocity=0;
@@ -21,17 +21,7 @@ public class PlayerControler : MonoBehaviour
     void Update()
     {
         _moveVector = Vector3.zero;
-
-    	if(Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
-    		_fallVelocity =-jumpForce;
-    	if(Input.GetKey(KeyCode.W))
-    	    _moveVector += transform.forward;
-    	if(Input.GetKey(KeyCode.D))
-    	    _moveVector += transform.right;
-    	if(Input.GetKey(KeyCode.S))
-    	    _moveVector -= transform.forward;
-    	if(Input.GetKey(KeyCode.A))
-    	    _moveVector -= transform.right;
+     Uprav();	
     }
 
     // Update is called once per frame
@@ -44,5 +34,18 @@ public class PlayerControler : MonoBehaviour
        {
        	 _fallVelocity = 0;
        } 
+    }
+    void Uprav()
+    {
+     if(Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
+            _fallVelocity =-jumpForce;
+        if(Input.GetKey(KeyCode.W))
+            _moveVector += transform.forward;
+        if(Input.GetKey(KeyCode.D))
+            _moveVector += transform.right;
+        if(Input.GetKey(KeyCode.S))
+            _moveVector -= transform.forward;
+        if(Input.GetKey(KeyCode.A))
+            _moveVector -= transform.right;   
     }
 }
