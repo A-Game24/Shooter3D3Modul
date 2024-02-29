@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
     public List<Transform> patrolPoint;
     public PlayerControler player;
+
     public float viewAngle;
+    public float damage = 30;
 
     private NavMeshAgent _navMeshAgent;
     private bool _isPlayerNoticed;
@@ -33,6 +36,7 @@ public class EnemyAI : MonoBehaviour
         _navMeshAgent.destination = player.transform.position;
       }
       Fol();
+      Attack();
     }
     void Look()
     {
@@ -58,9 +62,19 @@ public class EnemyAI : MonoBehaviour
     {
         if(!_isPlayerNoticed)
         {
-            if(_navMeshAgent.remainingDistance ==0)
+            if(_navMeshAgent.remainingDistance <=_navMeshAgent.stoppingDistance)
             {
                 AI();
+            }
+        }
+    }
+     void Attack()
+    {
+        if(_isPlayerNoticed)
+        {
+            if(_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+            {
+                player.GetComponent<PlayerHealth>().DealDamage(damage * Time.deltaTime);               
             }
         }
     }
