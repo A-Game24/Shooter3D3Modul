@@ -8,20 +8,25 @@ public class EnemyAI : MonoBehaviour
 {
     public List<Transform> patrolPoint;
     public PlayerControler player;
-
     public float viewAngle;
     public float damage = 30;
 
     private NavMeshAgent _navMeshAgent;
     private bool _isPlayerNoticed;
+    private EnemyHealth enemyHealth;
 
     // Start is called before the first frame update
     void Start()
     {
      _navMeshAgent = GetComponent<NavMeshAgent>();
+     enemyHealth = GetComponent<EnemyHealth>();
+
      AI();   
     }
-
+      public bool IsAlive()
+      {
+       return enemyHealth.IsAlive();
+      }
     // Update is called once per frame
     void Update()
     { 

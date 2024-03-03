@@ -15,9 +15,13 @@ public class NewBehaviourScript1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     if(Input.GetMouseButtonDown(0))
+     if(Input.GetMouseButtonDown(2))
      {
-        Instantiate(fireballPrefab,tran.position,tran.rotation);
+      Spawn();  
      }   
+    }
+    void Spawn()
+    {
+     Instantiate(fireballPrefab,tran.position,tran.rotation);   
     }
 }

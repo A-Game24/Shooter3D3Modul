@@ -12,15 +12,25 @@ public class PlayerHealth : MonoBehaviour
     public GameObject GameOver;
     public GameObject player;
 
+    public GameObject uron;
+    public GameObject uron1;
+    public GameObject cube;
+
+    public FireBallSourse FireBallSourse;
+
     void Start()
     {
      HP = maxHealth;
+     uron.active = false;
+     uron1.active = false;
+
     }
 
     public void DealDamage( float damage)
     {
      HP -= damage;
-     healthBar.fillAmount= HP/maxHealth;
+     Hal();
+     
      if(HP <= 0)
      {
       GameOver.active = true;
@@ -28,12 +38,37 @@ public class PlayerHealth : MonoBehaviour
       player.active = false;
       GetComponent<PlayerControler>().enabled = false;
       GetComponent<SampleScript>().enabled = false;
-      GetComponent<FireBallSourse>().enabled = false;
-      GetComponent<NewBehaviourScript1>().enabled = false;
-      GetComponent<FireBallSourse>().enabled = false;
-      
-     }   
+      GetComponentInChildren<NewBehaviourScript1>().enabled = false;
+      GetComponentInChildren<FireBallSourse>().enabled = false;     
+     }      
     }
+    public void Hal()
+    {
+     healthBar.fillAmount= HP/maxHealth;
+    }
+    public void AddHealth(float amount)
+    {
+        HP +=amount;
+        HP = Mathf.Clamp(HP, 0 ,maxHealth);
+        Hal();
+    }
+    void Update()
+    {
+      if(HP > 50)
+      {
+        uron.active = false;
+        uron1.active = false;
+      }
 
- 
+      if(HP <= 50)
+      {
+        uron.active = true;
+      }
+
+      if(HP <= 20)
+      {
+        uron1.active = true;
+        uron.active = false;
+      }      
+    }
 }
